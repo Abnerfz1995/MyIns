@@ -24,9 +24,9 @@
                         {{ object.get_like_count }} like{% if object.get_like_count > 1 %}s{% endif %}
                     {% endif %}
                 </div>
-                <div class="timestamp">
+                {% comment %}<div class="timestamp">
                     {{ object.posted_on|timesince }}
-                </div>
+                </div>{% endcomment %}
             </div>
             <ul class="comment-list">
                 {% for comment in object.comments.all %}
@@ -36,7 +36,7 @@
                     </a>
                     <span class="comment">{{ comment.comment }}</span>
                 </li>
-                {% endfor %}
+                {% endfor %} 
             </ul>
             <section class="input-row">
                     <i class="fa {% has_user_liked_post post user %} submit-like" aria-hidden="true"></i>

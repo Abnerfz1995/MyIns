@@ -12,7 +12,7 @@
                     <div class="poster__info">
                         <a href="{% url 'user_detail' post.author.id %}" class="poster__name">
                             {% if post.author.profile_pic %}
-                                <img class="poster__profilepic" src="/{{ post.author.profile_pic.url }}">
+                               <img class="poster__profilepic" src="/{{ post.author.profile_pic.url }}"> 
                             {% endif %}
                             {{ post.author.username }}
                         </a>
@@ -42,7 +42,7 @@
                     <ul class="comment-list">
                         <a class="view-more"></a>
                         {% for comment in post.comments.all %}
-                        <li class="comment-list__comment"></li>
+                        <li class="comment-list__comment">
                             <a href="{% url 'user_detail' comment.user.pk %}" class="user">
                                 {{ comment.user.username }}
                             </a>
