@@ -7,7 +7,10 @@
     <div class="col-xs-4 col-sm-3">
       <div class="picture-square" style="background-image: url(http://{{ request.META.HTTP_HOST }}/{{ post.image.url }}); background-size: contain;">
         <a href="{% url 'post_detail' post.pk %}">
-          <div class="content"></div>
+          <div class="content">
+                <i class="fa fa-heart" aria-hidden="true"></i> {{ post.get_like_count }}
+                <i class="fa fa-comment" aria-hidden="true"></i> {{ post.get_comment_count }} 
+          </div>
         </a>
       </div>
     </div>

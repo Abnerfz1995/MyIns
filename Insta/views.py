@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-
+from django.forms import ModelForm
 from Insta.forms import CustomUserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -36,7 +36,15 @@ class PostsView(LoginRequiredMixin, ListView):
 class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = "post_detail.html"
-    login_url = 'login'
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        liked = Like.objects.filter(post=self.kwargs.get('pk'), user=self.request.user).first()
+        if liked:
+            data['liked'] = 1
+        else:
+            data['liked'] = 0
+        return data
 
 class UserDetailView(LoginRequiredMixin, DeleteView):
     model = MyInstaUser
@@ -48,6 +56,7 @@ class UserEditView(LoginRequiredMixin, UpdateView):
     template_name = "userprofile_edit.html"
     fields = ['profile_pic', 'username']
     login_url = 'login'
+
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
