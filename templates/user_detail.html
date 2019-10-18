@@ -17,10 +17,9 @@
                 <div class="name-buttons">
                     <h1 class="username">{{ object.username }}</h1>
                     {% if user == object %}
-                        <button class="edit-profile">Edit Profile</button>
-                        {% comment %}<a class="edit-desktop" href="{% url 'edit_profile' object.pk %}">
+                        <a class="edit-desktop" href="{% url 'edit_profile' object.pk %}">
                             <button class="edit-profile">Edit Profile</button>
-                        </a> {% endcomment %}
+                        </a> 
                     {% else %}
                         {% is_following user object as following %}
                         <div class="follow-toggle__container">
@@ -54,7 +53,7 @@
                     <a href="{% url 'post_detail' post.pk %}">
                     <div class="content">
                         <i class="fa fa-heart" aria-hidden="true"></i> {{ post.get_like_count }}
-                        {% comment %}<i class="fa fa-comment" aria-hidden="true"></i> {{ post.get_comment_count }} {% endcomment %}
+                        <i class="fa fa-comment" aria-hidden="true"></i> {{ post.get_comment_count }} 
                     </div>
                     </a>
                 </div>

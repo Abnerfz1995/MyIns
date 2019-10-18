@@ -16,13 +16,13 @@
                             {% endif %}
                             {{ post.author.username }}
                         </a>
-                        {% comment %}<span class="poster__timestamp">
+                        <span class="poster__timestamp">
                             {{ post.posted_on|timesince }}
-                        </span>{% endcomment %}
+                        </span>
                     </div>
                 </div> 
                 <a href="{% url 'post_detail' post.pk %}">
-                    <img class="card__main-image" src="/{{ post.image }}">
+                    <img class="card__main-image" src="/{{ post.image.url }}">
                 </a>
                 <div class="card__panel-body">
                     <div class="likes">
@@ -35,12 +35,16 @@
                             <div class="hidden-data {{ post.pk }}" style="display: none;">
                                     <span class="post-pk">{{ post.pk }}</span>
                             </div>
+                            <div class="timestamp">
+                                {{ object.posted_on|timesince}}
+                            </div>
                     </section>
-                    {% comment %}<ul class="comment-list">
+                    <ul class="comment-list">
                         <a class="view-more"></a>
                         {% for comment in post.comments.all %}
                         <li class="comment-list__comment">
-                            <a href="{% url 'profile' comment.user.pk %}" class="user">
+                            {% comment %}<a href="/" class="user"></a>{% endcomment %}
+                            <a href="{% url 'user_detail' comment.user.pk %}" class="user">
                                 {{ comment.user.username }}
                             </a>
                             <span class="comment">{{ comment.comment }}</span>
@@ -55,7 +59,7 @@
                         <div class="hidden-data {{ post.pk }}" style="display: none;">
                             <span class="post-pk">{{ post.pk }}</span>
                         </div>
-                    </section>{% endcomment %}
+                    </section>
                 </div> 
             </div>
         </div>
